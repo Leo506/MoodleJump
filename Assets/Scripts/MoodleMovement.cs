@@ -22,11 +22,11 @@ public class MoodleMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         moodle.velocity = new Vector2(0, moodle.velocity.y);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (isDown)
         {
-            moodle.AddForce(new Vector2(force * dir, 0), ForceMode2D.Force);
+            moodle.velocity = new Vector2(force * dir, moodle.velocity.y);
         }
     }
 }
