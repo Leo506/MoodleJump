@@ -31,5 +31,6 @@ public class JumpAction : MonoBehaviour
 
         inJump = true;
         rb2d.AddForce(jumpForce, ForceMode2D.Impulse);
+        Debug.Log("Jump!!!");
     }
 }
