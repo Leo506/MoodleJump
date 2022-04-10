@@ -6,13 +6,13 @@ public class PlatformGenerator : MonoBehaviour
 {
     [SerializeField] GameObject platformPrefab;
     [SerializeField] float startY;
-    public float yInterval;
-    [SerializeField] float yInGame;
-    [SerializeField] float spawnInterval;
-    const float minX = -2.3f;
-    const float interval = 0.46f;
+    [SerializeField] float yInterval;
+    [SerializeField] JumpController jumpController;
 
-    public GameObject lastBlock;
+    const float minX = -2.3f;
+    const float xInterval = 0.46f;
+
+    GameObject lastBlock;
 
     private void Awake()
     {
@@ -24,7 +24,17 @@ public class PlatformGenerator : MonoBehaviour
 
     }
 
-    public void Generate(float yPos = 7.240001f)
+    private void Update()
+    {
+        if (jumpController.summDistance >= yInterval)
+        {
+            var yPos = lastBlock.transform.position.y + yInterval;
+            Generate(yPos);
+            jumpController.summDistance -= yInterval;
+        }
+    }
+
+    private void Generate(float yPos)
     {
         List<int> usedIndexes = new List<int>();
 
@@ -35,7 +45,7 @@ public class PlatformGenerator : MonoBehaviour
             if (index == -1)
                 return;
 
-            float xPos = minX + (index + 1) * interval;
+            float xPos = minX + (index + 1) * xInterval;
             Vector2 pos = new Vector2(xPos, yPos);
             lastBlock = Instantiate(platformPrefab, pos, Quaternion.identity);
             usedIndexes.Add(index);
@@ -75,14 +85,5 @@ public class PlatformGenerator : MonoBehaviour
         }
 
         return false;
-    }
-
-    private IEnumerator Spawning(float interval)
-    {
-        while (true)
-        {
-            Generate(yInGame);
-            yield return new WaitForSeconds(interval);
-        }
     }
 }
