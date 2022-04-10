@@ -9,7 +9,7 @@ public class MoodleSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var block = FindObjectOfType<BlockMovement>().transform;
+        var block = FindObjectOfType<PlatformGenerator>().platforms[0].gameObject.transform;
         moodle.transform.position = new Vector2(block.position.x, transform.position.y);
     }
 }
