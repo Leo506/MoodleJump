@@ -8,20 +8,31 @@ public class GameController : MonoBehaviour
     [SerializeField] MoodleSpawner moodleSpawner;
     [SerializeField] JumpController jumpController;
     [SerializeField] ScoreUI scoreUI;
+    [SerializeField] GameCanvas gameCanvas;
     [SerializeField] GameObject moodle;
 
-    int score;
+    int score = 0;
+    bool gameOver = false;
 
     private void Start()
     {
         platformGenerator.GenerateStartBlocks();
         moodleSpawner.Spawn(platformGenerator.platforms[0].transform);
 
-        score = 0;
+        Moodle.MoodleDiedEvent += GameOver;
+    }
+
+    private void OnDestroy()
+    {
+        Moodle.MoodleDiedEvent -= GameOver;
     }
 
     private void Update()
     {
+        if (gameOver)
+            return;
+
+
         var addScore = jumpController.CheckJump();
         if (addScore > 0)
         {
@@ -39,5 +50,13 @@ public class GameController : MonoBehaviour
         moodle.transform.Translate(0, -distance, 0);
         foreach (var item in platformGenerator.platforms)
             item.transform.Translate(0, -distance, 0);
+    }
+
+    private void GameOver()
+    {
+        gameOver = true;
+        foreach (var item in platformGenerator.platforms)
+            Destroy(item.gameObject);
+        gameCanvas.GameOver();
     }
 }
