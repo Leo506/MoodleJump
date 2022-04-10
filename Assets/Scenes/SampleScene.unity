@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543914124949ac140a2033b222909b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformGenerator: {fileID: 1253653159}
 --- !u!50 &87116265
 Rigidbody2D:
   serializedVersion: 4
@@ -386,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moodle: {fileID: 1581412375}
   line: -1
+  platformGenerator: {fileID: 1253653159}
 --- !u!4 &594063889
 Transform:
   m_ObjectHideFlags: 0
@@ -624,7 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa8866023f16f5489eb591b0147ef23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 8103984757706488424, guid: eeb025695e504514ebcc48c32080688f, type: 3}
+  platformPrefab: {fileID: 8103984757706488431, guid: eeb025695e504514ebcc48c32080688f, type: 3}
   startY: -4.43
   yInterval: 2.334
   jumpController: {fileID: 594063888}

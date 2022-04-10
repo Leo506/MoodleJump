@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject platformPrefab;
+    [SerializeField] BlockMovement platformPrefab;
     [SerializeField] float startY;
     [SerializeField] float yInterval;
     [SerializeField] JumpController jumpController;
 
+    public List<BlockMovement> platforms { get; private set; }
+
     const float minX = -2.3f;
     const float xInterval = 0.46f;
 
-    GameObject lastBlock;
+    BlockMovement lastBlock;
 
     private void Awake()
     {
+        platforms = new List<BlockMovement>();
         for (int i = 0; i < 5; i++)
         {
             var yPos = startY + i * yInterval;
@@ -48,6 +51,7 @@ public class PlatformGenerator : MonoBehaviour
             float xPos = minX + (index + 1) * xInterval;
             Vector2 pos = new Vector2(xPos, yPos);
             lastBlock = Instantiate(platformPrefab, pos, Quaternion.identity);
+            platforms.Add(lastBlock);
             usedIndexes.Add(index);
             usedIndexes.Add(index + 1);
         }

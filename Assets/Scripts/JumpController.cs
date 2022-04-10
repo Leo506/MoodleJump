@@ -6,6 +6,7 @@ public class JumpController : MonoBehaviour
 {
     [SerializeField] GameObject moodle;
     [SerializeField] float line;
+    [SerializeField] PlatformGenerator platformGenerator;
     float lastYPos;
     public float summDistance { get; set; }
 
@@ -22,10 +23,10 @@ public class JumpController : MonoBehaviour
         if (moodleYPos > line && (moodleYPos - lastYPos) > 0)
         {
             summDistance += moodleYPos - lastYPos;
-            foreach (var item in FindObjectsOfType<BlockMovement>())
-            {
+            
+            foreach (var item in platformGenerator.platforms)
                 item.transform.Translate(0, -(moodle.transform.position.y - lastYPos), 0);
-            }
+
             moodle.transform.Translate(0, -(moodleYPos - lastYPos), 0);
         }
         lastYPos = moodleYPos;
