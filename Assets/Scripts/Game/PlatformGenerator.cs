@@ -16,6 +16,17 @@ public class PlatformGenerator : MonoBehaviour
 
     BlockMovement lastBlock;
 
+
+    private void Start()
+    {
+        BlockMovement.BlockDestroyedEvent += RemoveBlock;
+    }
+
+    private void OnDestroy()
+    {
+        BlockMovement.BlockDestroyedEvent -= RemoveBlock;
+    }
+
     public void GenerateStartBlocks()
     {
         platforms = new List<BlockMovement>();
@@ -90,5 +101,10 @@ public class PlatformGenerator : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void RemoveBlock(BlockMovement block)
+    {
+        platforms.Remove(block);
     }
 }
