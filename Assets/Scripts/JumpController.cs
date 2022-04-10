@@ -6,31 +6,29 @@ public class JumpController : MonoBehaviour
 {
     [SerializeField] GameObject moodle;
     [SerializeField] float line;
-    [SerializeField] PlatformGenerator platformGenerator;
-    [SerializeField] ScoreUI scoreUI;
+
     float lastYPos;
-    public float summDistance { get; set; }
+    public float Distance { get; set; }
 
     private void Start()
     {
-        summDistance = 0;
+        Distance = 0;
         lastYPos = moodle.transform.position.y;
     }
 
-    // Update is called once per frame
-    void Update()
+    public float CheckJump()
     {
         var moodleYPos = moodle.transform.position.y;
-        if (moodleYPos > line && (moodleYPos - lastYPos) > 0)
+        var difference = moodleYPos - lastYPos;
+        if (moodleYPos > line && difference > 0)
         {
-            summDistance += moodleYPos - lastYPos;
-            scoreUI.UpdateScore((int)((moodleYPos - lastYPos) * 10));
-            
-            foreach (var item in platformGenerator.platforms)
-                item.transform.Translate(0, -(moodle.transform.position.y - lastYPos), 0);
-
-            moodle.transform.Translate(0, -(moodleYPos - lastYPos), 0);
+            Distance += difference;
+            lastYPos = moodleYPos;
+            return difference;
         }
+
         lastYPos = moodleYPos;
+
+        return 0;
     }
 }

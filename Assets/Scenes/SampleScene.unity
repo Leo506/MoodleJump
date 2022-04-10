@@ -387,8 +387,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moodle: {fileID: 1581412375}
   line: -1
-  platformGenerator: {fileID: 1253653159}
-  scoreUI: {fileID: 1253653161}
 --- !u!4 &594063889
 Transform:
   m_ObjectHideFlags: 0
@@ -584,6 +582,7 @@ GameObject:
   - component: {fileID: 1253653159}
   - component: {fileID: 1253653160}
   - component: {fileID: 1253653161}
+  - component: {fileID: 1253653162}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -659,6 +658,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2104551700}
+--- !u!114 &1253653162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253653156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89883506c7d0a9c4a831ea15cde09ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformGenerator: {fileID: 1253653159}
+  moodleSpawner: {fileID: 1253653160}
+  jumpController: {fileID: 594063888}
+  scoreUI: {fileID: 1253653161}
+  moodle: {fileID: 1581412375}
 --- !u!1 &1346668185
 GameObject:
   m_ObjectHideFlags: 0

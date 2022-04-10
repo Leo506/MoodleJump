@@ -7,7 +7,7 @@ public class PlatformGenerator : MonoBehaviour
     [SerializeField] BlockMovement platformPrefab;
     [SerializeField] float startY;
     [SerializeField] float yInterval;
-    [SerializeField] JumpController jumpController;
+
 
     public List<BlockMovement> platforms { get; private set; }
 
@@ -16,7 +16,7 @@ public class PlatformGenerator : MonoBehaviour
 
     BlockMovement lastBlock;
 
-    private void Awake()
+    public void GenerateStartBlocks()
     {
         platforms = new List<BlockMovement>();
         for (int i = 0; i < 5; i++)
@@ -24,17 +24,18 @@ public class PlatformGenerator : MonoBehaviour
             var yPos = startY + i * yInterval;
             Generate(yPos);
         }
-
     }
 
-    private void Update()
+    public float CheckDistanceToGenerate(float distance)
     {
-        if (jumpController.summDistance >= yInterval)
+        if (distance >= yInterval)
         {
             var yPos = lastBlock.transform.position.y + yInterval;
             Generate(yPos);
-            jumpController.summDistance -= yInterval;
+            return distance - yInterval;
         }
+
+        return distance;
     }
 
     private void Generate(float yPos)

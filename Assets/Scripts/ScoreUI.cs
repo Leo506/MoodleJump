@@ -7,8 +7,6 @@ public class ScoreUI : MonoBehaviour
 {
     [SerializeField] Text scoreText;
 
-    float score = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +15,6 @@ public class ScoreUI : MonoBehaviour
     
     public void UpdateScore(int score)
     {
-        this.score += score;
-        scoreText.text = this.score.ToString();
+        scoreText.text = score.ToString();
     }
 }
