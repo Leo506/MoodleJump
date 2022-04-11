@@ -10,11 +10,11 @@ public class ScoreUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = "0";
+        scoreText.text = "Score: 0";
     }
     
     public void UpdateScore(int score)
     {
-        scoreText.text = score.ToString();
+        scoreText.text = "Score: " + score.ToString();
     }
 }
