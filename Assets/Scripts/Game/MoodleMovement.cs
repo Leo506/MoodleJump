@@ -8,6 +8,7 @@ public class MoodleMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] Rigidbody2D moodle;
     [SerializeField] float force;
     [SerializeField] int dir;
+    [SerializeField] float screenEdge = 2.3f;
 
     bool isDown = false;
 
@@ -28,5 +29,10 @@ public class MoodleMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             moodle.velocity = new Vector2(force * dir, moodle.velocity.y);
         }
+
+        if (moodle.transform.position.x < -screenEdge)
+            moodle.transform.position = new Vector3(screenEdge, moodle.transform.position.y, 0);
+        if (moodle.transform.position.x > screenEdge)
+            moodle.transform.position = new Vector3(-screenEdge, moodle.transform.position.y, 0);
     }
 }
