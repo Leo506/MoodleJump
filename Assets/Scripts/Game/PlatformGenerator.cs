@@ -7,6 +7,7 @@ public class PlatformGenerator : MonoBehaviour
     [SerializeField] BlockMovement platformPrefab;
     [SerializeField] float startY;
     [SerializeField] float yInterval;
+    [SerializeField] MonsterSpawner monsterSpawner;
 
 
     public List<BlockMovement> platforms { get; private set; }
@@ -37,16 +38,27 @@ public class PlatformGenerator : MonoBehaviour
         }
     }
 
-    public float CheckDistanceToGenerate(float distance)
+    public float CheckDistanceToGenerate(float distance, bool monster)
     {
+
         if (distance >= yInterval)
         {
             var yPos = lastBlock.transform.position.y + yInterval;
-            Generate(yPos);
+
+            if (monster)
+                GeneratePlatformsWithMonster(yPos);
+            else
+                Generate(yPos);
             return distance - yInterval;
         }
 
         return distance;
+    }
+
+    public void GeneratePlatformsWithMonster(float yPos)
+    {
+        Generate(yPos);
+        monsterSpawner.SpawnMonster(lastBlock.transform.position.x);
     }
 
     private void Generate(float yPos)

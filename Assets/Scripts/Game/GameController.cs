@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] ScoreUI scoreUI;
     [SerializeField] GameCanvas gameCanvas;
     [SerializeField] GameObject moodle;
+    [SerializeField] MonsterSpawner monsterSpawner;
 
     int score = 0;
     bool gameOver = false;
@@ -41,7 +42,7 @@ public class GameController : MonoBehaviour
             scoreUI.UpdateScore(score);
         }
 
-        jumpController.Distance = platformGenerator.CheckDistanceToGenerate(jumpController.Distance);
+        jumpController.Distance = platformGenerator.CheckDistanceToGenerate(jumpController.Distance, score / 100 == 1);
     }
 
 
@@ -49,6 +50,8 @@ public class GameController : MonoBehaviour
     {
         moodle.transform.Translate(0, -distance, 0);
         foreach (var item in platformGenerator.platforms)
+            item.transform.Translate(0, -distance, 0);
+        foreach (var item in monsterSpawner.monstersOnScene)
             item.transform.Translate(0, -distance, 0);
     }
 
