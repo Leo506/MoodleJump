@@ -8,10 +8,6 @@ public class Generator
     public MonsterSpawner monsterSpawner { get; private set; }
     
     PlatformGeneratorData platformData;
-    
-
-    const float minX = -2.3f;
-    const float xInterval = 0.46f;
 
     BlockMovement lastBlock;
 
@@ -78,7 +74,7 @@ public class Generator
             if (index == -1)
                 return;
 
-            float xPos = minX + (index + 1) * xInterval;
+            float xPos = PlatformGeneratorData.minX + (index + 1) * PlatformGeneratorData.xInterval;
             Vector2 pos = new Vector2(xPos, yPos);
             lastBlock = GameObject.Instantiate(platformData.blockPrefab, pos, Quaternion.identity);
             platforms.Add(lastBlock);
