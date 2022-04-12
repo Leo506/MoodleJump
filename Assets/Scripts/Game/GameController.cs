@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Generating;
+using GameUI;
+using Jumping;
+using Moodle;
 
 public class GameController : MonoBehaviour
 {
@@ -26,12 +30,12 @@ public class GameController : MonoBehaviour
 
         moodleSpawner.Spawn(generator.platforms[0].transform);
 
-        Moodle.MoodleDiedEvent += GameOver;
+        Moodle.Moodle.MoodleDiedEvent += GameOver;
     }
 
     private void OnDestroy()
     {
-        Moodle.MoodleDiedEvent -= GameOver;
+        Moodle.Moodle.MoodleDiedEvent -= GameOver;
     }
 
     private void Update()
