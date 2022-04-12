@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     int score = 0;
     bool gameOver = false;
 
+    int scoreToSpawnMonster = 100;
+
     private void Start()
     {
         platformGenerator.GenerateStartBlocks();
@@ -42,7 +44,14 @@ public class GameController : MonoBehaviour
             scoreUI.UpdateScore(score);
         }
 
-        jumpController.Distance = platformGenerator.CheckDistanceToGenerate(jumpController.Distance, score / 100 == 1);
+        bool spawnMonster = false;
+        if (score / scoreToSpawnMonster == 1)
+        {
+            spawnMonster = true;
+            scoreToSpawnMonster += 100;
+        }
+
+        jumpController.Distance = platformGenerator.CheckDistanceToGenerate(jumpController.Distance, spawnMonster);
     }
 
 

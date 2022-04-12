@@ -17,6 +17,8 @@ public class PlatformGenerator : MonoBehaviour
 
     BlockMovement lastBlock;
 
+    bool spawnMonster = false;
+
 
     private void Start()
     {
@@ -40,13 +42,18 @@ public class PlatformGenerator : MonoBehaviour
 
     public float CheckDistanceToGenerate(float distance, bool monster)
     {
+        if (!spawnMonster)
+            spawnMonster = monster;
 
         if (distance >= yInterval)
         {
             var yPos = lastBlock.transform.position.y + yInterval;
 
-            if (monster)
+            if (spawnMonster)
+            {
                 GeneratePlatformsWithMonster(yPos);
+                spawnMonster = false;
+            }
             else
                 Generate(yPos);
             return distance - yInterval;
