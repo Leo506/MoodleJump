@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformGenerator : MonoBehaviour
+public class Generator
 {
-    [SerializeField] BlockMovement platformPrefab;
-    [SerializeField] float startY;
-    [SerializeField] float yInterval;
-    [SerializeField] MonsterSpawner monsterSpawner;
-
-
     public List<BlockMovement> platforms { get; private set; }
+    public MonsterSpawner monsterSpawner { get; private set; }
+    
+    PlatformGeneratorData platformData;
+    
 
     const float minX = -2.3f;
     const float xInterval = 0.46f;
@@ -19,15 +17,16 @@ public class PlatformGenerator : MonoBehaviour
 
     bool spawnMonster = false;
 
-
-    private void Start()
+    public Generator(PlatformGeneratorData platformData, MonsterGeneratorData monsterData)
     {
+        this.platformData = platformData;
+        monsterSpawner = new MonsterSpawner(monsterData);
         BlockMovement.BlockDestroyedEvent += RemoveBlock;
     }
 
-    private void OnDestroy()
+    ~Generator()
     {
-        BlockMovement.BlockDestroyedEvent -= RemoveBlock;
+        BlockMovement.BlockDestroyedEvent += RemoveBlock;
     }
 
     public void GenerateStartBlocks()
@@ -35,7 +34,7 @@ public class PlatformGenerator : MonoBehaviour
         platforms = new List<BlockMovement>();
         for (int i = 0; i < 5; i++)
         {
-            var yPos = startY + i * yInterval;
+            var yPos = platformData.startY + i * platformData.yInterval;
             Generate(yPos);
         }
     }
@@ -45,9 +44,9 @@ public class PlatformGenerator : MonoBehaviour
         if (!spawnMonster)
             spawnMonster = monster;
 
-        if (distance >= yInterval)
+        if (distance >= platformData.yInterval)
         {
-            var yPos = lastBlock.transform.position.y + yInterval;
+            var yPos = lastBlock.transform.position.y + platformData.yInterval;
 
             if (spawnMonster)
             {
@@ -56,7 +55,7 @@ public class PlatformGenerator : MonoBehaviour
             }
             else
                 Generate(yPos);
-            return distance - yInterval;
+            return distance - platformData.yInterval;
         }
 
         return distance;
@@ -81,7 +80,7 @@ public class PlatformGenerator : MonoBehaviour
 
             float xPos = minX + (index + 1) * xInterval;
             Vector2 pos = new Vector2(xPos, yPos);
-            lastBlock = Instantiate(platformPrefab, pos, Quaternion.identity);
+            lastBlock = GameObject.Instantiate(platformData.blockPrefab, pos, Quaternion.identity);
             platforms.Add(lastBlock);
             usedIndexes.Add(index);
             usedIndexes.Add(index + 1);

@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterSpawner : MonoBehaviour
+public class MonsterSpawner
 {
-    [SerializeField] Monster monsterPrefab;
-    [SerializeField] float ySpawnPoint;
+    public List<Monster> monstersOnScene { get; set; }
 
-    public List<Monster> monstersOnScene;
+    MonsterGeneratorData monsterData;
 
-    private void Start()
+    public MonsterSpawner(MonsterGeneratorData monsterData)
     {
+        this.monsterData = monsterData;
         monstersOnScene = new List<Monster>();
         Monster.MonsterDiedEvent += RemoveMonster;
     }
 
-    private void OnDestroy()
+    ~MonsterSpawner()
     {
         Monster.MonsterDiedEvent -= RemoveMonster;
     }
@@ -27,7 +27,7 @@ public class MonsterSpawner : MonoBehaviour
 
     public void SpawnMonster(float xPos)
     {
-        var monster = Instantiate(monsterPrefab, new Vector2(xPos, ySpawnPoint), Quaternion.identity);
+        var monster = GameObject.Instantiate(monsterData.monsterPrefab, new Vector2(xPos, monsterData.yPos), Quaternion.identity);
         monstersOnScene.Add(monster);
     }
 }

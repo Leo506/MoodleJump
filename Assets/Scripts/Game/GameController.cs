@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] PlatformGenerator platformGenerator;
     [SerializeField] MoodleSpawner moodleSpawner;
     [SerializeField] JumpController jumpController;
     [SerializeField] ScoreUI scoreUI;
     [SerializeField] GameCanvas gameCanvas;
     [SerializeField] GameObject moodle;
-    [SerializeField] MonsterSpawner monsterSpawner;
+    [SerializeField] PlatformGeneratorData platformGeneratorData;
+    [SerializeField] MonsterGeneratorData monsterGeneratorData;
 
     int score = 0;
     bool gameOver = false;
 
     int scoreToSpawnMonster = 100;
 
+    Generator generator;
+
     private void Start()
     {
-        platformGenerator.GenerateStartBlocks();
-        moodleSpawner.Spawn(platformGenerator.platforms[0].transform);
+        generator = new Generator(platformGeneratorData, monsterGeneratorData);
+        generator.GenerateStartBlocks();
+
+        moodleSpawner.Spawn(generator.platforms[0].transform);
 
         Moodle.MoodleDiedEvent += GameOver;
     }
@@ -51,23 +55,23 @@ public class GameController : MonoBehaviour
             scoreToSpawnMonster += 100;
         }
 
-        jumpController.Distance = platformGenerator.CheckDistanceToGenerate(jumpController.Distance, spawnMonster);
+        jumpController.Distance = generator.CheckDistanceToGenerate(jumpController.Distance, spawnMonster);
     }
 
 
     private void MoveObjectsDown(float distance)
     {
         moodle.transform.Translate(0, -distance, 0);
-        foreach (var item in platformGenerator.platforms)
+        foreach (var item in generator.platforms)
             item.transform.Translate(0, -distance, 0);
-        foreach (var item in monsterSpawner.monstersOnScene)
+        foreach (var item in generator.monsterSpawner.monstersOnScene)
             item.transform.Translate(0, -distance, 0);
     }
 
     private void GameOver()
     {
         gameOver = true;
-        foreach (var item in platformGenerator.platforms)
+        foreach (var item in generator.platforms)
             Destroy(item.gameObject);
         gameCanvas.GameOver();
     }

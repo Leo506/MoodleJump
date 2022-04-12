@@ -960,12 +960,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1253653158}
   - component: {fileID: 1253653157}
-  - component: {fileID: 1253653159}
   - component: {fileID: 1253653160}
   - component: {fileID: 1253653161}
   - component: {fileID: 1253653162}
   - component: {fileID: 1253653163}
-  - component: {fileID: 1253653164}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -999,22 +997,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1253653159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1253653156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa8866023f16f5489eb591b0147ef23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 8103984757706488431, guid: eeb025695e504514ebcc48c32080688f, type: 3}
-  startY: -4.43
-  yInterval: 2.334
-  monsterSpawner: {fileID: 1253653164}
 --- !u!114 &1253653160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,13 +1035,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89883506c7d0a9c4a831ea15cde09ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformGenerator: {fileID: 1253653159}
   moodleSpawner: {fileID: 1253653160}
   jumpController: {fileID: 594063888}
   scoreUI: {fileID: 1253653161}
   gameCanvas: {fileID: 1253653163}
   moodle: {fileID: 1581412375}
-  monsterSpawner: {fileID: 1253653164}
+  platformGeneratorData: {fileID: 11400000, guid: 90330f9bf33233342a46e8171d58f661, type: 2}
+  monsterGeneratorData: {fileID: 11400000, guid: adb0399f86617c34d95942a85b17bb15, type: 2}
 --- !u!114 &1253653163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,21 +1056,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 937566498}
   mainCanvas: {fileID: 1054034710}
---- !u!114 &1253653164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1253653156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c227eed32de71543ae776ef90c4ddb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 6682229267008845559, guid: 718c0a9b29dba8b4388c61b90a72f1d5, type: 3}
-  ySpawnPoint: 8
-  monstersOnScene: []
 --- !u!1 &1354099293
 GameObject:
   m_ObjectHideFlags: 0
