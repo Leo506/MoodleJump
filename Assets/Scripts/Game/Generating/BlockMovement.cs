@@ -8,7 +8,7 @@ namespace Generating
     {
         public static event System.Action<BlockMovement> BlockDestroyedEvent;
 
-        private void OnDestroy()
+        public void BlockDisable()
         {
             BlockDestroyedEvent?.Invoke(this);
         }

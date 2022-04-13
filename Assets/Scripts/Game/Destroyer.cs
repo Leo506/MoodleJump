@@ -9,8 +9,12 @@ public class Destroyer : MonoBehaviour
         var gameObj = collision.gameObject;
         var block = gameObj.GetComponent<Generating.BlockMovement>();
 
-        
-        
-        Destroy(gameObj);
+        if (block != null)
+        {
+            block.BlockDisable();
+            block.gameObject.SetActive(false);
+        }
+        else
+            Destroy(gameObj);
     }
 }

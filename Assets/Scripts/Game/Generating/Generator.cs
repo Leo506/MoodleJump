@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pooling;
 
 namespace Generating
 {
@@ -15,11 +16,16 @@ namespace Generating
 
         bool spawnMonster = false;
 
+        Pool<BlockMovement> blockPool;
+
         public Generator(PlatformGeneratorData platformData, MonsterGeneratorData monsterData)
         {
             this.platformData = platformData;
             monsterSpawner = new MonsterSpawner(monsterData);
             BlockMovement.BlockDestroyedEvent += RemoveBlock;
+
+            blockPool = new Pool<BlockMovement>(platformData.blockPrefab, 25, null);
+            blockPool.autoExpand = true;
         }
 
         ~Generator()
@@ -78,8 +84,9 @@ namespace Generating
 
                 float xPos = PlatformGeneratorData.minX + (index + 1) * PlatformGeneratorData.xInterval;
                 Vector2 pos = new Vector2(xPos, yPos);
-                lastBlock = GameObject.Instantiate(platformData.blockPrefab, pos, Quaternion.identity);
+                lastBlock = blockPool.GetFreeElement();
                 platforms.Add(lastBlock);
+                lastBlock.transform.position = pos;
                 usedIndexes.Add(index);
                 usedIndexes.Add(index + 1);
             }
