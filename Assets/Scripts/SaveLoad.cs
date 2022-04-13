@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace SaveAndLoad
 {
@@ -26,12 +24,14 @@ namespace SaveAndLoad
             if (!File.Exists(path))
                 return null;
 
-
-            using (FileStream fs = File.Create(Path.Combine(Application.persistentDataPath, "gameData.moodle")))
+            T toReturn;
+            using (FileStream fs = File.Open(path, FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                return formatter.Deserialize(fs) as T;
+                toReturn = formatter.Deserialize(fs) as T;
             }
+
+            return toReturn;
         }
 
     }

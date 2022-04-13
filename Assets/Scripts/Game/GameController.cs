@@ -22,9 +22,12 @@ public class GameController : MonoBehaviour
     int scoreToSpawnMonster = 100;
 
     Generator generator;
+    HightScores scoreController;
 
     private void Start()
     {
+        scoreController = new HightScores();
+
         generator = new Generator(platformGeneratorData, monsterGeneratorData);
         generator.GenerateStartBlocks();
 
@@ -74,9 +77,13 @@ public class GameController : MonoBehaviour
 
     private void GameOver()
     {
+        scoreController.TryAddScore(score);
         gameOver = true;
         foreach (var item in generator.platforms)
-            Destroy(item.gameObject);
+        {
+            if (item != null)
+                Destroy(item.gameObject);
+        }
         gameCanvas.GameOver();
     }
 }

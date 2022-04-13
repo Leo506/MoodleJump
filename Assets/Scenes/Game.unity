@@ -1023,6 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2104551700}
+  scoreListText: {fileID: 1476630934}
 --- !u!114 &1253653162
 MonoBehaviour:
   m_ObjectHideFlags: 0
