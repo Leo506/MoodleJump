@@ -18,6 +18,8 @@ namespace Generating
 
         Pool<BlockMovement> blockPool;
 
+        int[] platformsCountTable = { 1, 1, 1, 1, 1, 1, 1, 1, 2, 3 };
+
         public Generator(PlatformGeneratorData platformData, MonsterGeneratorData monsterData)
         {
             this.platformData = platformData;
@@ -75,7 +77,7 @@ namespace Generating
         {
             List<int> usedIndexes = new List<int>();
 
-            int platformCounts = Random.Range(1, 4);
+            int platformCounts = platformsCountTable[Random.Range(0, platformsCountTable.Length)];
             for (int i = 0; i < platformCounts; i++)
             {
                 int index = GetRandomIndex(usedIndexes);
