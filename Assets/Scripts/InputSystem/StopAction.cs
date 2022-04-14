@@ -18,7 +18,8 @@ namespace InputSystem
         public override void Perform()
         {
             Debug.Log("MoodleRb == null: " +  (moodleRb == null));
-            moodleRb.velocity = new Vector2(0, moodleRb.velocity.y);
+            if (moodleRb != null)
+                moodleRb.velocity = new Vector2(0, moodleRb.velocity.y);
         }
     }
 }

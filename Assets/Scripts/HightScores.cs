@@ -23,10 +23,10 @@ public class HightScores
             ScoresLoadedEvent?.Invoke(hightScores);
     }
 
-    ~HightScores()
+    /*~HightScores()
     {
         SaveLoad.Save<List<int>>(hightScores);
-    }
+    }*/
 
 
     public void TryAddScore(int score)

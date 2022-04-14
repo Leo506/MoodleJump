@@ -12,8 +12,11 @@ namespace GameUI
 
         public void GameOver()
         {
-            mainCanvas.enabled = false;
-            gameOverCanvas.enabled = true;
+            if (mainCanvas != null)
+                mainCanvas.enabled = false;
+            
+            if (gameOverCanvas != null)
+                gameOverCanvas.enabled = true;
         }
 
         public void PlayAgain()

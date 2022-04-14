@@ -19,7 +19,8 @@ namespace InputSystem
 
         public override void Perform()
         {
-            moodleRb.velocity = new Vector2(force * direction, moodleRb.velocity.y);
+            if (moodleRb != null)
+                moodleRb.velocity = new Vector2(force * direction, moodleRb.velocity.y);
         }
     }
 }
