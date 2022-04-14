@@ -86,4 +86,10 @@ public class GameController : MonoBehaviour
         }
         gameCanvas.GameOver();
     }
+
+    public void Exit()
+    {
+        scoreController.TryAddScore(score);
+        Application.Quit();
+    }
 }
