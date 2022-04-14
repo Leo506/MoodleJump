@@ -1411,7 +1411,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moodle: {fileID: 1581412377}
-  force: 3
+  dAction: {fileID: 11400000, guid: 9c0596e9d514a7d46a5a2bf7b928c556, type: 2}
+  aAction: {fileID: 11400000, guid: 587b7329de4396d4aa17e83cb40a7f61, type: 2}
+  stopAction: {fileID: 11400000, guid: 6f18ecae5da4b4e4bbeed2311fae632a, type: 2}
   screenEdge: 2.3
 --- !u!1 &1654532215
 GameObject:

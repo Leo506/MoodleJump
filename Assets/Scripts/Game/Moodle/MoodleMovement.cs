@@ -8,8 +8,15 @@ namespace Moodle
     public class MoodleMovement : MonoBehaviour
     {
         [SerializeField] Rigidbody2D moodle;
-        [SerializeField] float force;
+        [SerializeField] InputSystem.InputAction dAction, aAction, stopAction;
         [SerializeField] float screenEdge = 2.3f;
+
+        private void Start()
+        {
+            dAction.Init();
+            aAction.Init();
+            stopAction.Init();
+        }
 
 
         private void Update()
@@ -17,19 +24,16 @@ namespace Moodle
             // Движение в стороны
             if (Input.GetKey(KeyCode.D))
             {
-                moodle.velocity = new Vector2(force, moodle.velocity.y);
-                Debug.Log("Button D pressed");
+                dAction.Perform();
             }
             if (Input.GetKey(KeyCode.A))
             {
-                moodle.velocity = new Vector2(-force, moodle.velocity.y);
-                Debug.Log("Button A pressed");
+                aAction.Perform();
             }
 
             if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
             {
-                moodle.velocity = new Vector2(0, moodle.velocity.y);
-                Debug.Log("Button up");
+                stopAction.Perform();
             }
 
             // Телепорт из одного края экрана в другой
